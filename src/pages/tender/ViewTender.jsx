@@ -18,7 +18,7 @@ const ViewTender = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:3000/")
+    axios.get("http://localhost:3000/tenders")
       .then((res) => {
         setData(res.data);
       })
@@ -33,7 +33,7 @@ const ViewTender = () => {
 
   return (
     <div>
-      {/* {data.map((tender) => ( */}
+      {data.map((tender) => (
           <div className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
             <div className='flex justify-between'>
               <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Tender Detail</h1>
@@ -52,8 +52,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
                       state
                     </label>
-                    <p>Bihar</p>
-                    {/* <p>{tender?.name}</p> */}
+                    <p>{tender?.state}</p>
 
                   </div>
                 </div>
@@ -61,25 +60,25 @@ const ViewTender = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="email">
-                      departmentName
+                      department Name
                     </label>
-                    <p>ABC dept</p>
+                    <p>{tender?.departmentName}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                      tenderName
+                      tender No
                     </label>
-                    <p>Name</p>
+                    <p>{tender?.tenderNo}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                      tenderNo
+                      tender Name
                     </label>
-                    855429965
+                    <p>{tender?.tenderName}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -87,7 +86,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
                       emd
                     </label>
-                    <p>kghkjxhdf</p>
+                    <p>{tender?.emd}</p>
                   </div>
                 </div>
 
@@ -100,7 +99,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
                       startDate
                     </label>
-                    <p>15 july 2023</p>
+                    <p>{tender?.startDate}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -108,7 +107,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
                       endDate
                     </label>
-                    <p>18 july 2023</p>
+                    <p>{tender?.endDate}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -116,7 +115,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
                       prebidMeetingDate
                     </label>
-                    <p>5 feb 2023</p>
+                    <p>{tender?.prebidMeetingDate}</p>
                   </div>
                 </div>
 
@@ -125,7 +124,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
                       prebidMeetingVenue
                     </label>
-                    <p>cccc bbb dddd</p>
+                    <p>{tender?.prebidMeetingVenue}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -133,7 +132,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
                       contactName
                     </label>
-                    <p>Ramesh</p>
+                    <p>{tender?.contactName}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
@@ -141,7 +140,7 @@ const ViewTender = () => {
                     <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
                       contactNumber
                     </label>
-                    <p>8549568452</p>
+                    <p>{tender?.contactNumber}</p>
                   </div>
                 </div>
               </div>
@@ -153,7 +152,7 @@ const ViewTender = () => {
               <button className=''><Link target='_blank' to="LinkHere" > Doc3 URL </Link></button>
             </div>
           </div>
-          {/* ))} */}
+          ))}
     </div>
   )
 }

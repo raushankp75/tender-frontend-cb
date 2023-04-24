@@ -10,7 +10,12 @@ const CreateTender = () => {
 
     const handleSubmit = (e) => {
         // e.preventDefault();
-        axios.post("http://localhost:9000/",)
+        axios.post("http://localhost:3000/tenders", {
+            headers:{
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        })
             .then(res => {
                 console.log(res.data);
 
@@ -62,7 +67,7 @@ const CreateTender = () => {
                             <div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="state">
                                             state
                                         </label>
                                         <Field
@@ -79,7 +84,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="email">
-                                            departmentName                                        </label>
+                                            department Name                                        </label>
                                         <Field
                                             name="departmentName"
                                             id="departmentName"
@@ -93,21 +98,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                                            tenderName
-                                        </label>
-                                        <Field
-                                            name="tenderName"
-                                            id="tenderName"
-                                            type="text"
-                                            placeholder=""
-                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap -mx-3 mb-6">
-                                    <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                                            tenderNo
+                                            tender No
                                         </label>
                                         <Field
                                             name="tenderNo"
@@ -118,6 +109,21 @@ const CreateTender = () => {
                                         />
                                     </div>
                                 </div>
+                                <div className="flex flex-wrap -mx-3 mb-6">
+                                    <div className="w-full px-3">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            tender Name
+                                        </label>
+                                        <Field
+                                            name="tenderName"
+                                            id="tenderName"
+                                            type="text"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        />
+                                    </div>
+                                </div>
+                               
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
@@ -140,7 +146,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
-                                            startDate
+                                            start Date
                                         </label>
                                         <Field
                                             name="startDate"
@@ -154,7 +160,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
-                                            endDate
+                                            end Date
                                         </label>
                                         <Field
                                             name="endDate"
@@ -168,7 +174,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
-                                            prebidMeetingDate
+                                            prebidMeeting Date
                                         </label>
                                         <Field
                                             name="prebidMeetingDate"
@@ -183,7 +189,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                                            prebidMeetingVenue
+                                            prebidMeeting Venue
                                         </label>
                                         <Field
                                             name="prebidMeetingVenue"
@@ -197,7 +203,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                                            contactName
+                                            contact Name
                                         </label>
                                         <Field
                                             name="contactName"
@@ -211,7 +217,7 @@ const CreateTender = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
-                                            contactNumber
+                                            contact Number
                                         </label>
                                         <Field
                                             name="contactNumber"
@@ -234,9 +240,6 @@ const CreateTender = () => {
                                     onChange={(event) => {
                                         setDoc1(event.target.files[0])
                                     }}
-                                    required
-
-                                // className="hidden"
                                 />
                                 <input
                                     id="doc1url2"
@@ -246,9 +249,6 @@ const CreateTender = () => {
                                     onChange={(event) => {
                                         setDoc2(event.target.files[0])
                                     }}
-                                    required
-
-                                // className="hidden"
                                 />
                                 <input
                                     id="doc1url3"
@@ -258,9 +258,6 @@ const CreateTender = () => {
                                     onChange={(event) => {
                                         setDoc3(event.target.files[0])
                                     }}
-                                    required
-
-                                // className="hidden"
                                 />
                             </div>
 

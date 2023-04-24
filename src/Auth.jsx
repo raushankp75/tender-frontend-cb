@@ -60,17 +60,16 @@ const Auth = () => {
     // e.preventDefault();
     console.log(data);
     axios.post("http://localhost:3000/auth/login", data,  {
-      withCredentials: true,    // IMPORTANT!!!
+      // withCredentials: true,
     })
       .then(res => {
-
-        console.log(res.data);
+        console.log(res);
         // if (res.data.success) {
 
-          navigate("/tenderlist")
           localStorage.setItem("role", res.data.user.role)
           localStorage.setItem("refreshToken", res.data.refreshToken)
           setRole(res.data.role)
+          navigate("/tenderlist")
         // }
 
       }).catch(err => {
