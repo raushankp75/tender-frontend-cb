@@ -59,17 +59,19 @@ const Auth = () => {
   const handleSubmit = (e) => {
     // e.preventDefault();
     console.log(data);
-    axios.post("http://localhost:9000/api/login", data)
+    axios.post("http://localhost:3000/auth/login", data,  {
+      withCredentials: true,    // IMPORTANT!!!
+    })
       .then(res => {
 
         console.log(res.data);
-        if (res.data.success) {
+        // if (res.data.success) {
 
           navigate("/tenderlist")
-          localStorage.setItem("role", res.data.role)
-          localStorage.setItem("token", res.data.token)
+          localStorage.setItem("role", res.data.user.role)
+          localStorage.setItem("refreshToken", res.data.refreshToken)
           setRole(res.data.role)
-        }
+        // }
 
       }).catch(err => {
         console.log(err);

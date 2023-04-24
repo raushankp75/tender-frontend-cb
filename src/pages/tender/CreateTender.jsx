@@ -1,12 +1,26 @@
 import React, { useState } from 'react'
-import { Formik, Field, Form, ErrorMessage, useFormik } from 'formik';
+import { Formik, Field, Form } from 'formik';
+import axios from 'axios';
 
 const CreateTender = () => {
+
     const [doc1, setDoc1] = useState("")
     const [doc2, setDoc2] = useState("")
     const [doc3, setDoc3] = useState("")
+
+    const handleSubmit = (e) => {
+        // e.preventDefault();
+        axios.post("http://localhost:9000/",)
+            .then(res => {
+                console.log(res.data);
+
+            }).catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
-        <div>
+        <div className="flex justify-center my-12 mx-5">
             <Formik
                 initialValues={{
                     state: '',
@@ -18,214 +32,248 @@ const CreateTender = () => {
                     endDate: '',
                     prebidMeetingDate: '',
                     prebidMeetingVenue: '',
-                    name: '',
-                    mobileNo: '',
+                    contactName: '',
+                    contactNumber: '',
                 }}
 
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
-                    // alert(JSON.stringify(values, null, 26));
+                    // alert(JSON.stringify(values, null, 2));
                     // const values = new values()
                     let vals = new FormData()
                     vals.append("tender", JSON.stringify(values))
                     vals.append("doc1", doc1)
                     vals.append("doc2", doc2)
                     vals.append("doc3", doc3)
-
-
-                    addVendors(vals).then((data) => {
-                        console.log(data, 36)
+                    handleSubmit(vals).then((data) => {
+                        console.log(data, 88)
+                        // setToastMessage(data.message)
+                        // setShowToast(true)  // for showing toast
                     })
-
-
-                }}>
-
+                    console.log(values)
+                }}
+            >
 
                 {({ values, setFieldValue }) => (
-                    <Form className='w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md mt-12'>
-                        <h1 className='font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest'>Create New Tender</h1>
+                    <Form className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
+                        <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Create New Tender</h1>
                         <div className='grid md:grid-cols-2 grid-cols-1 gap-x-16'>
                             {/* left */}
                             <div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                            State
+                                            state
                                         </label>
                                         <Field
-                                            id="state"
                                             name="state"
+                                            id="state"
                                             type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap -mx-3 mb-6">
-                                    <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                            Department Name
-                                        </label>
-                                        <Field
-                                            id="departmentName"
-                                            name="departmentName"
-                                            type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap -mx-3 mb-6">
-                                    <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                            Tender No
-                                        </label>
-                                        <Field
-                                            id="tenderNo"
-                                            name="tenderNo"
-                                            type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap -mx-3 mb-6">
-                                    <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                            Tender Name
-                                        </label>
-                                        <Field
-                                            id="tenderName"
-                                            name="tenderName"
-                                            type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="flex flex-wrap -mx-3 mb-6">
-                                    <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                            EMD
-                                        </label>
-                                        <Field
-                                            id="emd"
-                                            name="emd"
-                                            type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                                        />
+                                        {/* <p className="text-gray-600 text-sm italic">For validation message</p> */}
                                     </div>
                                 </div>
 
+                                <div className="flex flex-wrap -mx-3 mb-6">
+                                    <div className="w-full px-3">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="email">
+                                            departmentName                                        </label>
+                                        <Field
+                                            name="departmentName"
+                                            id="departmentName"
+                                            type="text"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        />
+                                        {/* <p className="text-red-500 italic">For validation message</p> */}
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap -mx-3 mb-6">
+                                    <div className="w-full px-3">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            tenderName
+                                        </label>
+                                        <Field
+                                            name="tenderName"
+                                            id="tenderName"
+                                            type="text"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap -mx-3 mb-6">
+                                    <div className="w-full px-3">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            tenderNo
+                                        </label>
+                                        <Field
+                                            name="tenderNo"
+                                            id="tenderNo"
+                                            type="text"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap -mx-3 mb-6">
+                                    <div className="w-full px-3">
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            emd
+                                        </label>
+                                        <Field
+                                            name="emd"
+                                            id="emd"
+                                            type="text"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        />
+                                    </div>
+                                </div>
 
                             </div>
-
 
                             {/* right */}
                             <div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        Start Date
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                                            startDate
                                         </label>
                                         <Field
-                                            id="startDate"
                                             name="startDate"
+                                            id="startDate"
                                             type="date"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        End Date
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                                            endDate
                                         </label>
                                         <Field
-                                            id="endDate"
                                             name="endDate"
+                                            id="endDate"
                                             type="date"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        PrebidMeeting Date
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                                            prebidMeetingDate
                                         </label>
                                         <Field
-                                            id="prebidMeetingDate"
                                             name="prebidMeetingDate"
+                                            id="prebidMeetingDate"
                                             type="date"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
+
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        PrebidMeeting Venue
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            prebidMeetingVenue
                                         </label>
                                         <Field
-                                            id="prebidMeetingVenue"
                                             name="prebidMeetingVenue"
+                                            id="prebidMeetingVenue"
                                             type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        Name
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            contactName
                                         </label>
                                         <Field
-                                            id="name"
-                                            name="name"
+                                            name="contactName"
+                                            id="contactName"
                                             type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
-                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
-                                        Mobile no
+                                        <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                                            contactNumber
                                         </label>
                                         <Field
-                                            id="mobileNo"
-                                            name="mobileNo"
+                                            name="contactNumber"
+                                            id="contactNumber"
                                             type="text"
-                                            className="appearance-none block w-full text-gray-700 border-2 border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                            placeholder=""
+                                            className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                         />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
+                                <input
+                                    id="doc1url"
+                                    name="doc1url"
+                                    placeholder=""
+                                    type="file"
+                                    onChange={(event) => {
+                                        setDoc1(event.target.files[0])
+                                    }}
+                                    required
 
-                        {/* files upload */}
-                        <div className='flex gap-x-32'>
-                            <input
-                                id="doc1"
-                                name="doc1"
-                                type="file"
-                                onChange={(event) => { setDoc1(event.target.files[0]) }}
-                            />
-                            <input
-                                id="2"
-                                name="2"
-                                type="file"
-                                onChange={(event) => { setDoc1(event.target.files[0]) }}
-                            />
-                            <input
-                                id="3"
-                                name="3"
-                                type="file"
-                                onChange={(event) => { setDoc1(event.target.files[0]) }}
-                            />
+                                // className="hidden"
+                                />
+                                <input
+                                    id="doc1ur2"
+                                    name="doc1ur2"
+                                    placeholder=""
+                                    type="file"
+                                    onChange={(event) => {
+                                        setDoc2(event.target.files[0])
+                                    }}
+                                    required
+
+                                // className="hidden"
+                                />
+                                <input
+                                    id="doc1ur3"
+                                    name="doc1ur3"
+                                    placeholder=""
+                                    type="file"
+                                    onChange={(event) => {
+                                        setDoc3(event.target.files[0])
+                                    }}
+                                    required
+
+                                // className="hidden"
+                                />
+                            </div>
+
+
+                        <div className='flex justify-center'>
+                            <button type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>Submit</button>
                         </div>
                     </Form>
                 )}
-            </Formik >
-        </div >
+
+            </Formik>
+
+        </div>
     )
 }
 

@@ -112,7 +112,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[50%] h-[70%]">
+         {role && <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[50%] h-[70%]">
             {Menus.map((menu, i) => {
               return (
                 <li key={i}>
@@ -123,7 +123,7 @@ const Sidebar = () => {
                 </li>
               )
             })}
-          </ul>
+          </ul>}
 
           <div className="ml-4">
             {!role &&
