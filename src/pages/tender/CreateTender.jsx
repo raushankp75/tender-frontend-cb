@@ -8,11 +8,11 @@ const CreateTender = () => {
     const [doc2, setDoc2] = useState("")
     const [doc3, setDoc3] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (vals) => {
         // e.preventDefault();
-        axios.post("http://localhost:3000/tenders", {
-            headers:{
-                "Content-Type": "application/json"
+        await axios.post("http://localhost:3000/tenders", vals, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             },
             withCredentials: true,
         })
@@ -46,15 +46,16 @@ const CreateTender = () => {
                     // alert(JSON.stringify(values, null, 2));
                     // const values = new values()
                     let vals = new FormData()
-                    vals.append("tender", JSON.stringify(values))
+                    vals.append("tenders", JSON.stringify(values))
                     vals.append("doc1", doc1)
                     vals.append("doc2", doc2)
                     vals.append("doc3", doc3)
-                    handleSubmit(vals).then((data) => {
-                        console.log(data, 88)
-                        // setToastMessage(data.message)
-                        // setShowToast(true)  // for showing toast
-                    })
+
+                    console.log(vals, 54)
+                    handleSubmit(vals, 55)
+
+                    // setToastMessage(data.message)
+                    // setShowToast(true)  // for showing toast
                     console.log(values)
                 }}
             >
@@ -123,7 +124,7 @@ const CreateTender = () => {
                                         />
                                     </div>
                                 </div>
-                               
+
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full px-3">
                                         <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
@@ -232,34 +233,34 @@ const CreateTender = () => {
                         </div>
 
                         <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
-                                <input
-                                    id="doc1url1"
-                                    name="doc1url1"
-                                    placeholder=""
-                                    type="file"
-                                    onChange={(event) => {
-                                        setDoc1(event.target.files[0])
-                                    }}
-                                />
-                                <input
-                                    id="doc1url2"
-                                    name="doc1url2"
-                                    placeholder=""
-                                    type="file"
-                                    onChange={(event) => {
-                                        setDoc2(event.target.files[0])
-                                    }}
-                                />
-                                <input
-                                    id="doc1url3"
-                                    name="doc1url3"
-                                    placeholder=""
-                                    type="file"
-                                    onChange={(event) => {
-                                        setDoc3(event.target.files[0])
-                                    }}
-                                />
-                            </div>
+                            <input
+                                id="doc1url1"
+                                name="doc1url1"
+                                placeholder=""
+                                type="file"
+                                onChange={(event) => {
+                                    setDoc1(event.target.files[0])
+                                }}
+                            />
+                            <input
+                                id="doc1url2"
+                                name="doc1url2"
+                                placeholder=""
+                                type="file"
+                                onChange={(event) => {
+                                    setDoc2(event.target.files[0])
+                                }}
+                            />
+                            <input
+                                id="doc1url3"
+                                name="doc1url3"
+                                placeholder=""
+                                type="file"
+                                onChange={(event) => {
+                                    setDoc3(event.target.files[0])
+                                }}
+                            />
+                        </div>
 
 
                         <div className='flex justify-center'>

@@ -60,7 +60,7 @@ const Auth = () => {
     // e.preventDefault();
     console.log(data);
     axios.post("http://localhost:3000/auth/login", data,  {
-      // withCredentials: true,
+      withCredentials: true,
     })
       .then(res => {
         console.log(res);

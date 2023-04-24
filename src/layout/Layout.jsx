@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
     return (
         <div className="flex gap-5">
             <Sidebar />
-            <main className="max-w-6xl flex-1 mx-auto py-4">{children}</main>
+            <main className="max-w-[1200px] flex-1 md:mx-auto mr-6 -ml-10 py-16">{children}</main>
         </div>
     )
 }

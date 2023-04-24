@@ -127,15 +127,15 @@ const Sidebar = () => {
 
           <div className="ml-4">
             {!role &&
-              <NavLink className="flex gap-x-5 my-3" style={navLinkStyles}>
+              <NavLink to="/" className="flex gap-x-5 my-3" style={navLinkStyles}>
                 <div><AiOutlineUser className="text-3xl" /></div>
-                <button> <Link to="/" className='font-semibold text-xl'>Login</Link> </button>
+                <h1 className="font-semibold text-xl"> Login </h1>
               </NavLink>
             }
             {role &&
-              <NavLink className="flex gap-x-5 my-3">
+              <NavLink onClick={logout} className="flex gap-x-5 my-3">
                 <div><AiOutlineLogout className="text-3xl" /></div>
-                <button onClick={logout}> <Link to="/" className='font-semibold text-xl'>Logout</Link> </button>
+                <h1 className="font-semibold text-xl"> Logout </h1>
               </NavLink>
             }
           </div>
