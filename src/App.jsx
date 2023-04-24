@@ -9,6 +9,7 @@ import ViewTender from './pages/tender/ViewTender'
 
 import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react'
+import EditTender from './pages/tender/EditTender';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />
             <Route path="/viewtender" element={<ViewTender />} />
+            <Route path="/edittender/:id" element={<EditTender />} />
           </Routes>
         }
       </Layout>

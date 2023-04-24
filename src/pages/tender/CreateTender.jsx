@@ -20,7 +20,7 @@ const CreateTender = () => {
     }
 
     return (
-        <div className="flex justify-center my-12 mx-5">
+        <div>
             <Formik
                 initialValues={{
                     state: '',
@@ -227,8 +227,8 @@ const CreateTender = () => {
 
                         <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
                                 <input
-                                    id="doc1url"
-                                    name="doc1url"
+                                    id="doc1url1"
+                                    name="doc1url1"
                                     placeholder=""
                                     type="file"
                                     onChange={(event) => {
@@ -239,8 +239,8 @@ const CreateTender = () => {
                                 // className="hidden"
                                 />
                                 <input
-                                    id="doc1ur2"
-                                    name="doc1ur2"
+                                    id="doc1url2"
+                                    name="doc1url2"
                                     placeholder=""
                                     type="file"
                                     onChange={(event) => {
@@ -251,8 +251,8 @@ const CreateTender = () => {
                                 // className="hidden"
                                 />
                                 <input
-                                    id="doc1ur3"
-                                    name="doc1ur3"
+                                    id="doc1url3"
+                                    name="doc1url3"
                                     placeholder=""
                                     type="file"
                                     onChange={(event) => {
