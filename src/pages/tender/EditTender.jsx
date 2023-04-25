@@ -33,7 +33,7 @@ const EditTender = () => {
 
   const handleSubmit = async (vals) => {
     // e.preventDefault();
-    await axios.post("http://localhost:3000/tenders", vals, {
+    await axios.put("http://localhost:3000/tenders", vals, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -47,9 +47,17 @@ const EditTender = () => {
       })
   }
 
+
+  // const handleData = (e) => {
+  //   const newData = { ...data }
+  //   newData[e.target.id] = e.target.value;
+  //   setData(newData)
+  // }
+
   return (
     <div>
       <Formik
+        // enableReinitialize // missing piece!!
         initialValues={{
           state: '',
           departmentName: '',
@@ -64,6 +72,8 @@ const EditTender = () => {
           contactNumber: '',
         }}
 
+
+        // initialValues = {data || initialValues}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500));
           // alert(JSON.stringify(values, null, 2));
@@ -102,7 +112,11 @@ const EditTender = () => {
                           name="state"
                           id="state"
                           type="text"
-                          value={tender.state}
+                          // value={tender.state}
+                          // value={tender.state}{...tender}
+                          // defaultValue = {tender.state}
+                          // onChange={() => {handleData}}
+                          // onChange={tender.handleChange}
                           placeholder=""
                           className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         />
