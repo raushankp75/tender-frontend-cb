@@ -37,8 +37,8 @@ const ViewTender = () => {
             <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Tender Detail</h1>
             <div>
               <button className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>
-                {/* <Link to={`/edittender/${tender.id}`}>Edit</Link> */}
-                <Link to="/edittender">Edit</Link>
+                <Link to={`/edittender/${tender.id}`}>Edit</Link>
+                {/* <Link to="/edittender">Edit</Link> */}
               </button>
             </div>
           </div>

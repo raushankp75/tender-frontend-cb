@@ -77,7 +77,9 @@ const Sidebar = () => {
     return {
       fontWeight: isActive ? "Bold" : "normal",
       // borderBottom: isActive ? "2px solid gree" : "",
-      color: isActive ? "#999" : ""
+      backgroundColor: isActive ? "#555" : "",
+      padding: isActive ? "8px" : "",
+      color: isActive ? "cyan" : ""
     }
   }
 

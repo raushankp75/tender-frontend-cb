@@ -24,7 +24,15 @@ function App() {
           </Routes>
         }
 
-        {(role) &&
+        {(role == "admin") &&
+          <Routes>
+            <Route path="/createtender" element={<CreateTender />} />
+            <Route path="/tenderlist" element={<TenderList />} />
+            <Route path="/viewtender/:id" element={<ViewTender />} />
+            <Route path="/edittender/:id" element={<EditTender />} />
+          </Routes>
+        }
+        {(role == "user") &&
           <Routes>
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />

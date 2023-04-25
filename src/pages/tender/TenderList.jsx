@@ -87,13 +87,14 @@ const TenderList = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/tenders`, {
+    axios.get("http://localhost:3000/tenders", {
       headers: {
         "Content-Type": "application/json"
       },
       withCredentials: true,
     })
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {
