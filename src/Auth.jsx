@@ -73,6 +73,8 @@ const Auth = () => {
 
         localStorage.setItem("role", res.data.user.role)
         localStorage.setItem("refreshToken", res.data.refreshToken)
+        localStorage.setItem("expDate", res.data.expDate)
+
         setRole(localStorage.getItem("role"))
         navigate("/tenderlist")
         // }
