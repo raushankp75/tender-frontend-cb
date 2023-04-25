@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { MdMenu } from "react-icons/md";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
+import axios from "axios";
 
 
 const Sidebar = () => {
@@ -82,12 +83,29 @@ const Sidebar = () => {
 
 
   // logout
-  const logout = () => {
-    localStorage.clear()
-    setRole("")
-    navigate("/")
+  const logout = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/auth/logout',
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(response.data);
+      localStorage.clear();
+      setRole('');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  }
+
+
 
 
   return (
@@ -103,8 +121,8 @@ const Sidebar = () => {
         initial={{ x: isTabletMid ? -250 : 0 }}
         animate={open ? "open" : "closed"}
 
-        className=" bg-[#333] text-white text-gray shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
-            overflow-hidden md:relative fixed
+        className=" fixed bg-[#333] text-white text-gray shadow-xl z-[999] max-w-[16rem]  w-[16rem] 
+            overflow-hidden md:relative 
          h-screen "
       >
         <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300  mx-3 ">
@@ -112,7 +130,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col h-full">
-         {role && <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[50%] h-[70%]">
+          {role && <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[50%] h-[70%]">
             {Menus.map((menu, i) => {
               return (
                 <li key={i}>

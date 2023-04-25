@@ -17,7 +17,8 @@ const ViewTender = () => {
       withCredentials: true,
     })
       .then((res) => {
-        setData(res.data);
+        console.log(res)
+        setData([res.data]);
       })
       .catch((err) => {
         console.log("error, 18")
@@ -31,7 +32,7 @@ const ViewTender = () => {
   return (
     <div>
       {data.map((tender) => (
-        <div className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
+        <div key={tender.id} className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
           <div className='flex justify-between'>
             <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Tender Detail</h1>
             <div>
@@ -46,7 +47,7 @@ const ViewTender = () => {
             <div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="employeeId">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="employeeId">
                     state
                   </label>
                   <p>{tender?.state}</p>
@@ -56,7 +57,7 @@ const ViewTender = () => {
 
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="email">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="email">
                     department Name
                   </label>
                   <p>{tender?.departmentName}</p>
@@ -64,7 +65,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     tender No
                   </label>
                   <p>{tender?.tenderNo}</p>
@@ -72,7 +73,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     tender Name
                   </label>
                   <p>{tender?.tenderName}</p>
@@ -80,7 +81,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     emd
                   </label>
                   <p>{tender?.emd}</p>
@@ -93,7 +94,7 @@ const ViewTender = () => {
             <div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="dob">
                     startDate
                   </label>
                   <p>{tender?.startDate}</p>
@@ -101,7 +102,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="dob">
                     endDate
                   </label>
                   <p>{tender?.endDate}</p>
@@ -109,7 +110,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="dob">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="dob">
                     prebidMeetingDate
                   </label>
                   <p>{tender?.prebidMeetingDate}</p>
@@ -118,7 +119,7 @@ const ViewTender = () => {
 
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     prebidMeetingVenue
                   </label>
                   <p>{tender?.prebidMeetingVenue}</p>
@@ -126,7 +127,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     contactName
                   </label>
                   <p>{tender?.contactName}</p>
@@ -134,7 +135,7 @@ const ViewTender = () => {
               </div>
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full px-3">
-                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="mobile">
+                  <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor="mobile">
                     contactNumber
                   </label>
                   <p>{tender?.contactNumber}</p>

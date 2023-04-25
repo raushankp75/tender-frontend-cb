@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
+import { FcViewDetails } from 'react-icons/fc';
+import { Link } from 'react-router-dom';
+
 // import format from 'date-fns/format'
 
 const TenderList = () => {
   const [data, setData] = useState([]);
-  
+
   const columns = [
     {
       name: 'Contact Name',
@@ -36,19 +39,19 @@ const TenderList = () => {
       minWidth: "250px"
     },
 
-    // {
-    //     name: "",
-    //     button: true,
-    //     cell: (row) => (
-    //         <button
-    //             className="text-green-700 px-1 py-1 outline outline-[1px] flex items-center gap-1"
-    //         >
-    //             <FcViewDetails />
-    //             <Link to={`/profile/${row.id}`}>Details</Link>
-    //         </button>
-    //     ),
+    {
+      name: "",
+      button: true,
+      cell: (row) => (
+        <button
+          className="text-green-700 px-1 py-1 outline outline-[1px] flex items-center gap-1"
+        >
+          <FcViewDetails />
+          <Link to={`/viewtender/${row.id}`}>Details</Link>
+        </button>
+      ),
 
-    // },
+    },
   ];
 
   const customStyles = {

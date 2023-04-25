@@ -28,7 +28,7 @@ function App() {
           <Routes>
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />
-            <Route path="/viewtender" element={<ViewTender />} />
+            <Route path="/viewtender/:id" element={<ViewTender />} />
             <Route path="/edittender/:id" element={<EditTender />} />
           </Routes>
         }

@@ -14,11 +14,11 @@ const SidebarData = [
     "link": "/createtender",
     "icon": IoIosCreate
   },
-  {
-    "name": "View Tender",
-    "link": "/viewtender",
-    "icon": HiOutlineViewGridAdd
-  },
+  // {
+  //   "name": "View Tender",
+  //   "link": "/viewtender",
+  //   "icon": HiOutlineViewGridAdd
+  // },
 
   // {
   //   "name": "Login",
