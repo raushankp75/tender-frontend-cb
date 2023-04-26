@@ -26,7 +26,7 @@ function App() {
       const now = Date.now();
       // console.log(now, 28)
 
-      if (now < expDate - 5 * 60 * 1000) {
+      if (now > expDate - 5 * 60 * 1000) {
         console.log("refresh token sent 5 min before token expiry")
         axios.post('http://localhost:3000/auth/refreshToken', { refreshToken }, {
           headers: {
@@ -48,7 +48,7 @@ function App() {
           });
       }
 
-      console.log("not expired")
+      // console.log("not expired")
     }, 300000); // refresh the token every 5 minutes (300000 milliseconds)
 
     return () => clearInterval(interval);

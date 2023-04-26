@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import { FcViewDetails } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import api from '../../utils/ApiServices';
+
 
 // import format from 'date-fns/format'
 
@@ -87,7 +89,7 @@ const TenderList = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/tenders", {
+    api.get("tenders", {
       headers: {
         "Content-Type": "application/json"
       },
