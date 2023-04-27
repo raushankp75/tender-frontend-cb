@@ -118,7 +118,9 @@ const Sidebar = () => {
         onClick={() => setOpen(false)}
         className={`md:hidden fixed inset-0 max-h-screen z-10 bg-black/50 ${open ? "block" : "hidden"
           } `}
-      ></div>
+      >
+
+      </div>
       <motion.div
         ref={sidebarRef}
         variants={Nav_animation}

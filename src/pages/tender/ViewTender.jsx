@@ -145,24 +145,24 @@ const ViewTender = () => {
           </div>
 
           <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 my-6'>
-            <div className='flex flex-col gap-4 font-bold'>
+            {tender?.doc1url && <div className='flex flex-col gap-4 font-bold'>
               <h1 className='text-center'>DOC 1</h1>
               <Link target='_blank' to={baseDocUrl + tender?.doc1url} >
                 <img width="200px" src={baseDocUrl + tender?.doc1url} alt="" srcset="" />
               </Link>
-            </div>
-            <div className='flex flex-col gap-4 font-bold'>
+            </div>}
+            {tender?.doc2url && <div className='flex flex-col gap-4 font-bold'>
               <h1 className='text-center'>DOC 2</h1>
               <Link target='_blank' to={baseDocUrl + tender?.doc2url} >
                 <img width="200px" src={baseDocUrl + tender?.doc2url} alt="" srcset="" />
               </Link>
-            </div>
-            <div className='flex flex-col gap-4 font-bold'>
+            </div>}
+            {tender?.doc3url && <div className='flex flex-col gap-4 font-bold'>
               <h1 className='text-center'>DOC 3</h1>
               <Link target='_blank' to={baseDocUrl + tender?.doc3url} >
                 <img width="200px" src={baseDocUrl + tender?.doc3url} alt="" srcset="" />
               </Link>
-            </div>
+            </div>}
           </div>
         </div>
       ))}

@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import api from '../../utils/ApiServices';
 import Select from 'react-select';
 import Modal from 'react-modal';
+import { AiFillFilter, AiOutlineCloudDownload } from 'react-icons/ai';
+import { AnimatePresence, motion } from 'framer-motion';
+import { CSVLink } from 'react-csv';
 
 // import format from 'date-fns/format'
 
@@ -20,10 +23,21 @@ const TenderList = () => {
   const [remark, setRemark] = useState("")
   const [refresh, setRefresh] = useState(false)
 
-  console.log(selectedRow, 16)
+  const [statusFilter, setStatusFilter] = useState(null);
+
+  const filteredData = data.filter(row => {
+    if (statusFilter === null) {
+      return true;
+    }
+    return row.status === statusFilter;
+  });
+
+  const handleFilterClick = status => {
+    setStatusFilter(status);
+  };
 
   const options = [
-    { value: 'ongoing', label: 'Ongoing' },
+    { value: 'ongoing', label: 'Ongoing', style: "" },
     { value: 'closed', label: 'Closed' },
     { value: 'not-interested', label: 'Not Interested' },
     { value: 'draft', label: 'Draft' },
@@ -46,34 +60,8 @@ const TenderList = () => {
     console.log(id, status, "handleRemarkSubmit")
     updateRowStatus(id, status, remark);
     setShowPopup(false);
+    setRefresh(!refresh)
   };
-
-  // const updateRowStatus = async (id, status, remark) => {
-  //   try {
-  //     const response = await axios.put(`http://localhost:3000/tenders/update-row?id=${id}&status=${status}&remark=${remark}`);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // const updateRowStatus = async (id, status, remark) => {
-
-  //   console.log({ "id": id, "status": status, "remark": remark }, 56)
-
-  //   // ?id=${id}&status=${status}&remark=${remark}
-  //   try {
-  //     await api.put(`http://localhost:3000/tenders/updateRemark/${id}?status=${status}&remark=${remark}`, {
-  //       headers: {
-  //         "content-Type": "application/json"
-  //       },
-  //       withCredentials: true
-  //     }
-  //     );
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   const updateRowStatus = async (id, status, remark) => {
     // e.preventDefault();
@@ -88,12 +76,59 @@ const TenderList = () => {
         console.log(res, 52);
         if (res.status == 200) {
           console.log("Okay")
-          setRefresh(true)
+          setRefresh(!refresh)
         }
       }).catch(err => {
         console.log(err);
       })
   }
+
+  const csvColumns = [
+    {
+      name: 'Status',
+      selector: 'status',
+      sortable: true,
+    },
+
+    {
+      name: 'Tender No',
+      selector: row => row.tenderNo,
+      // width: "80px",                  
+      wrap: true,
+      minWidth: "150px",
+      sortable: true,
+    },
+
+    {
+      name: 'Tender Name',
+      selector: row => row.tenderName,
+
+      wrap: true,
+      minWidth: "150px",
+      sortable: true,
+
+    },
+    {
+      name: 'Remark',
+      selector: row => row.remark,
+      wrap: true,
+      minWidth: "150px"
+    },
+    {
+      name: 'Created By',
+      selector: row => row.createdBy,
+
+      wrap: true,
+      minWidth: "150px"
+    },
+
+    {
+      name: "",
+      button: true,
+      wrap: true,
+      minWidth: "200px"
+    },
+  ];
 
   const columns = [
     {
@@ -125,6 +160,8 @@ const TenderList = () => {
         </div>
 
       ),
+      sortable: true,
+      minWidth: "150px"
     },
 
     // {
@@ -146,14 +183,17 @@ const TenderList = () => {
       selector: row => row.tenderNo,
       // width: "80px",                  
       wrap: true,
-      minWidth: "150px"
+      minWidth: "150px",
+      sortable: true,
     },
     {
       name: 'Tender Name',
       selector: row => row.tenderName,
       // width: "80px",
       wrap: true,
-      minWidth: "150px"
+      minWidth: "150px",
+      sortable: true,
+
     },
     {
       name: 'Remark',
@@ -165,8 +205,8 @@ const TenderList = () => {
     {
       name: 'Created By',
       selector: row => row.createdBy,
-      // width: "80px",
-      wrap: true,
+      width: "120px",
+      // wrap: true,
       minWidth: "150px"
     },
 
@@ -181,7 +221,18 @@ const TenderList = () => {
           <Link to={`/viewtender/${row.id}`}>Details</Link>
         </button>
       ),
+      wrap: true,
+      minWidth: "200px",
+      width: "120px",
+    },
+  ];
 
+  const conditionalRowStyles = [
+    {
+      when: row => row.status === 'closed',
+      style: {
+        textDecoration: 'line-through',
+      },
     },
   ];
 
@@ -236,6 +287,12 @@ const TenderList = () => {
 
   Modal.setAppElement('#root');
 
+  const [showOptions, setShowOptions] = useState(false);
+
+  const handleToggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
   return (
     <div>
       {showPopup && (
@@ -280,12 +337,56 @@ const TenderList = () => {
           </form>
         </Modal>
       )}
+      <div className='flex gap-4 items-center mb-3'>
+        <button
+          className='border px-4 py-2 bg-blue-400 font-bold text-white'
+          onClick={() => handleFilterClick(null)}
+        >
+          ALL
+        </button>
+        <button
+          className='border px-4 py-2'
+          onClick={handleToggleOptions}
+        >
+          <AiFillFilter size={30} color='blue' />
+        </button>
+        <AnimatePresence>
+          {showOptions && (
+            <motion.div
+              className='flex flex-wrap gap-4'
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              {options.map((option) => (
+                <button
+                  key={option.value}
+                  className='border px-4 py-2'
+                  onClick={() => {
+                    handleFilterClick(option.value);
+                    handleToggleOptions();
+                  }}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <CSVLink className='font-bold flex ml-auto gap-2 w-48 mr-4 border px-4 py-[2px] relative bottom-2 border-black' data={data} filename={"table_data.csv"}>
+        <AiOutlineCloudDownload size={24} width={24} /> Download CSV
+      </CSVLink>
 
       <div style={{ position: 'relative', zIndex: 1 }}>
         <DataTable
           columns={columns}
-          data={data}
+          data={filteredData}
           customStyles={customStyles}
+          conditionalRowStyles={conditionalRowStyles}
+          highlightOnHover
+          pagination
         />
       </div>
     </div>
