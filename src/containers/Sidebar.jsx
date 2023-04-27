@@ -136,7 +136,7 @@ const Sidebar = () => {
             <div className="flex justify-center flex-col items-center text-center text-sm">
               {role === "admin" ? <><RiAdminLine /> {role}</> : <><RiUser3Line />{role}</>}
             </div>
-            Tendor</span>
+            Tender</span>
         </div>
 
         <div className="flex flex-col h-full">

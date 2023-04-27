@@ -9,6 +9,10 @@ import Modal from 'react-modal';
 import { AiFillFilter, AiOutlineCloudDownload } from 'react-icons/ai';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CSVLink } from 'react-csv';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 // import format from 'date-fns/format'
 
@@ -61,6 +65,7 @@ const TenderList = () => {
     updateRowStatus(id, status, remark);
     setShowPopup(false);
     setRefresh(!refresh)
+    // toast("Remark Submitted!")
   };
 
   const updateRowStatus = async (id, status, remark) => {
@@ -77,6 +82,7 @@ const TenderList = () => {
         if (res.status == 200) {
           console.log("Okay")
           setRefresh(!refresh)
+          toast("Status Changed!")
         }
       }).catch(err => {
         console.log(err);
@@ -295,11 +301,9 @@ const TenderList = () => {
 
   return (
     <div>
+      <ToastContainer />
       {showPopup && (
-        <Modal
-          isOpen={showPopup}
-          onRequestClose={() => setShowPopup(false)}
-          appElement={document.getElementById('root')}
+        <Modal isOpen={showPopup} onRequestClose={() => setShowPopup(false)} appElement={document.getElementById('root')}
           style={{
             overlay: { zIndex: 9999 },
 
