@@ -9,7 +9,11 @@ import Modal from 'react-modal';
 
 // import format from 'date-fns/format'
 
+
+
 const TenderList = () => {
+
+  const role = localStorage.getItem('role')
   const [data, setData] = useState([]);
   const [selectedRow, setSelectedRow] = useState({ id: null, status: 'ongoing' });
   const [showPopup, setShowPopup] = useState(false);
@@ -98,6 +102,7 @@ const TenderList = () => {
       cell: row => (
         <div style={{ position: 'relative' }}>
           <Select
+            isDisabled={role === "user"}
             options={options}
             value={options.find(option => option.value === row.status)}
             onChange={option => handleStatusChange(row, option.value)}
@@ -118,6 +123,7 @@ const TenderList = () => {
             menuPortalTarget={document.body}
           />
         </div>
+
       ),
     },
 
