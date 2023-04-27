@@ -16,14 +16,16 @@ const getAccessToken = async () => {
         withCredentials: true,
     })
 
-    const result = await response.data()
+    const result = await response
+
+    console.log(result, 21)
 
     console.log("accessToken refreshed 1")
 
-    console.log(await response, result, 21);
+    console.log(await response, 25);
     // setExpDate(res.data.expDate);
     try {
-        localStorage.setItem('expDate', res.data.expDate);
+        localStorage.setItem('expDate', result.data.expDate);
     } catch (err) {
         console.log("localStorage error:", err);
     }
@@ -32,7 +34,7 @@ const getAccessToken = async () => {
     //     console.log("refresh token error:", err);
     // });
 
-    return response.data
+    return result
 }
 
 api.interceptors.response.use(
@@ -45,11 +47,12 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             const response = await getAccessToken();
-            console.log(response, 44)
+            // console.log(response, 44)
             // const response = await refreshTokens(accessToken);
             if (response.status === 200) {
                 // const newAccessToken = response.data.access_token;
                 // api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+                console.log("here in respons status global api")
                 return api(originalRequest);
             }
         }

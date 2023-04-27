@@ -114,7 +114,7 @@ const Sidebar = () => {
     <div>
       <div
         onClick={() => setOpen(false)}
-        className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-black/50 ${open ? "block" : "hidden"
+        className={`md:hidden fixed inset-0 max-h-screen z-10 bg-black/50 ${open ? "block" : "hidden"
           } `}
       ></div>
       <motion.div

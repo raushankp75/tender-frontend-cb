@@ -44,12 +44,12 @@ const EditTender = () => {
     // e.preventDefault();
     await api.put("tenders/" + id, vals, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'content-Type': 'multipart/form-data'
       },
       withCredentials: true,
     })
       .then(res => {
-        console.log(res.data);
+        console.log(res.data, 52);
 
       }).catch(err => {
         console.log(err);
