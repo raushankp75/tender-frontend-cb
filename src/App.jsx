@@ -59,7 +59,8 @@ function App() {
       <Layout>
         {(!role) &&
           <Routes>
-            <Route path="/" element={<Auth />} />
+            {/* <Route path="/" element={<Auth />} /> */}
+            <Route path="*" element={<Auth />} />
           </Routes>
         }
 

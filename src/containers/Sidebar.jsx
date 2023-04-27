@@ -13,6 +13,8 @@ import { MdMenu } from "react-icons/md";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
+import { RiAdminLine, RiUser3Line } from "react-icons/ri";
+
 
 
 const Sidebar = () => {
@@ -128,7 +130,11 @@ const Sidebar = () => {
          h-screen "
       >
         <div className="flex items-center gap-2.5 font-medium border-b py-3 border-slate-300  mx-3 ">
-          <span className="text-3xl font-bold whitespace-pre mx-16">Tendor</span>
+          <span className="text-3xl gap-12 flex font-bold whitespace-pre">
+            <div className="flex justify-center flex-col items-center text-center text-sm">
+              {role === "admin" ? <><RiAdminLine /> {role}</> : <><RiUser3Line />{role}</>}
+            </div>
+            Tendor</span>
         </div>
 
         <div className="flex flex-col h-full">
@@ -145,7 +151,7 @@ const Sidebar = () => {
             })}
           </ul>}
 
-          <div className="ml-4">
+          <div className="ml-4 absolute bottom-5">
             {!role &&
               <NavLink to="/" className="flex gap-x-5 my-3" style={navLinkStyles}>
                 <div><AiOutlineUser className="text-3xl" /></div>

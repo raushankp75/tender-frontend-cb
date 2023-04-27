@@ -127,33 +127,47 @@ const TenderList = () => {
       ),
     },
 
-    {
-      name: 'Contact Name',
-      selector: row => row.contactName,
-      sortable: true,
-      wrap: true,
-      minWidth: "140px"
-    },
-    {
-      name: 'Contact Number',
-      selector: row => row.contactNumber,
-      wrap: true,
-      minWidth: "140px"
-    },
+    // {
+    //   name: 'Contact Name',
+    //   selector: row => row.contactName,
+    //   sortable: true,
+    //   wrap: true,
+    //   minWidth: "140px"
+    // },
+    // {
+    //   name: 'Contact Number',
+    //   selector: row => row.contactNumber,
+    //   wrap: true,
+    //   minWidth: "140px"
+    // },
 
     {
       name: 'Tender No',
       selector: row => row.tenderNo,
       // width: "80px",                  
       wrap: true,
-      minWidth: "250px"
+      minWidth: "150px"
     },
     {
       name: 'Tender Name',
       selector: row => row.tenderName,
-      // width: "80px",                  
+      // width: "80px",
       wrap: true,
-      minWidth: "250px"
+      minWidth: "150px"
+    },
+    {
+      name: 'Remark',
+      selector: row => row.remark,
+      // width: "80px",
+      wrap: true,
+      minWidth: "150px"
+    },
+    {
+      name: 'Created By',
+      selector: row => row.createdBy,
+      // width: "80px",
+      wrap: true,
+      minWidth: "150px"
     },
 
     {
