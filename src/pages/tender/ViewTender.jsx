@@ -2,6 +2,9 @@ import React, { useEffect, useState, useContext } from 'react'
 import AuthProvider, { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
+import api from '../../utils/ApiServices';
+import { Document, Page, pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const ViewTender = () => {
 
@@ -10,7 +13,7 @@ const ViewTender = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/tenders/${id}`, {
+    api.get(`tenders/${id}`, {
       headers: {
         "Content-Type": "application/json"
       },
@@ -28,6 +31,38 @@ const ViewTender = () => {
 
   const baseDocUrl = "http://localhost:3000"
 
+  // Determine the file type based on the file extension
+  const fileType = (url) => {
+    const extension = url.split('.').pop().toLowerCase();
+    if (extension === 'pdf') {
+      return 'pdf';
+    } else {
+      return 'image';
+    }
+  };
+
+
+  const renderImage = (url, imgNo) => (
+    <div className='flex flex-col gap-4 font-bold'>
+      <h1 className='text-center'>Img{imgNo}</h1>
+      <Link target='_blank' to={baseDocUrl + url}>
+        <img width="200px" src={baseDocUrl + url} alt="" srcset="" />
+      </Link>
+    </div>
+  );
+
+
+  const renderPdf = (url, docNo) => (
+    <div className='w-36'>
+      {/* <h1 className='text-center'>PDF</h1> */}
+      <Link target='_blank' to={baseDocUrl + url} >
+        <h1 className='text-blue-800  font-bold '>PDF{docNo}</h1>
+      </Link>
+      {/* <Document file={baseDocUrl + url}>
+        <Page pageNumber={1} style={{ width: 200, height: 200 }} />
+      </Document> */}
+    </div>
+  );
 
   return (
     <div>
@@ -144,25 +179,24 @@ const ViewTender = () => {
             </div>
           </div>
 
-          <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 my-6'>
-            {tender?.doc1url && <div className='flex flex-col gap-4 font-bold'>
-              <h1 className='text-center'>DOC 1</h1>
-              <Link target='_blank' to={baseDocUrl + tender?.doc1url} >
-                <img width="200px" src={baseDocUrl + tender?.doc1url} alt="" srcset="" />
-              </Link>
-            </div>}
-            {tender?.doc2url && <div className='flex flex-col gap-4 font-bold'>
-              <h1 className='text-center'>DOC 2</h1>
-              <Link target='_blank' to={baseDocUrl + tender?.doc2url} >
-                <img width="200px" src={baseDocUrl + tender?.doc2url} alt="" srcset="" />
-              </Link>
-            </div>}
-            {tender?.doc3url && <div className='flex flex-col gap-4 font-bold'>
-              <h1 className='text-center'>DOC 3</h1>
-              <Link target='_blank' to={baseDocUrl + tender?.doc3url} >
-                <img width="200px" src={baseDocUrl + tender?.doc3url} alt="" srcset="" />
-              </Link>
-            </div>}
+          {/* <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 my-6'> */}
+          <div className='grid grid-cols-3 place-item-center'>
+
+            {tender?.doc1url && fileType(tender.doc1url) === 'pdf' ? (
+              renderPdf(tender.doc1url, 1)
+            ) : (
+              renderImage(tender.doc1url, 1)
+            )}
+            {tender?.doc2url && fileType(tender.doc2url) === 'pdf' ? (
+              renderPdf(tender.doc2url, 2)
+            ) : (
+              renderImage(tender.doc2url, 2)
+            )}
+            {tender?.doc3url && fileType(tender.doc3url) === 'pdf' ? (
+              renderPdf(tender.doc3url, 3)
+            ) : (
+              renderImage(tender.doc3url, 3)
+            )}
           </div>
         </div>
       ))}

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import api from '../../utils/ApiServices';
 import { parseISO, format } from 'date-fns'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditTender = () => {
 
@@ -50,6 +52,9 @@ const EditTender = () => {
     })
       .then(res => {
         console.log(res.data, 52);
+        // if (res.data.success) {
+        toast(res.data.message)
+        // }
 
       }).catch(err => {
         console.log(err);
@@ -100,7 +105,7 @@ const EditTender = () => {
         {({ values, setFieldValue, handleChange }) => (
 
           <Form className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
-            {/* {data.map((tender) => ( */}
+            <ToastContainer />
             <div>
               <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Update Tender</h1>
 
@@ -321,7 +326,7 @@ const EditTender = () => {
                 <button type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>Submit</button>
               </div>
             </div>
-            {/* ))} */}
+
 
 
           </Form>

@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from './layout/Layout'
 
 import Auth from './Auth'
@@ -66,6 +66,7 @@ function App() {
 
         {(role == "admin") &&
           <Routes>
+            <Route path="/" element={<Navigate to="/tenderlist" />} />
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />
             <Route path="/viewtender/:id" element={<ViewTender />} />
@@ -74,6 +75,7 @@ function App() {
         }
         {(role == "user") &&
           <Routes>
+            <Route path="/" element={<Navigate to="/tenderlist" />} />
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />
             <Route path="/viewtender/:id" element={<ViewTender />} />
