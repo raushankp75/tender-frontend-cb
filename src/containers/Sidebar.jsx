@@ -14,7 +14,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/AuthContext';
 import axios from "axios";
 import { RiAdminLine, RiUser3Line } from "react-icons/ri";
-
+import { FiUserPlus } from "react-icons/fi";
 
 
 const Sidebar = () => {
