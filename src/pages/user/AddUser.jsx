@@ -43,6 +43,8 @@ const AddUser = () => {
         <div className=' justify-center flex items-center w-full h-full'>
             <ToastContainer/>
             <form className='w-96' onSubmit={handleSubmit}>
+
+                <h1 className='text-center text-blue-400 underline text-2xl pb-4'>ADD USER</h1>
                 <div>
                     <input value={data.name} onChange={handleData} type="text" name='' id='name' placeholder='Enter User Name ' className='h-12 w-full rounded-md px-3 bg-transparent shadow-sm border-b-2 border-b-blue-500 rounded-bl-md rounded-br-md focus:border-b-2 focus:border-b-yellow-700 outline-none' />
                     {/* <p className='text-red-600 text-sm'>{error.name}</p> */}
