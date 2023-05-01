@@ -21,9 +21,25 @@ const CreateTender = () => {
         contactNumber: '',
     })
 
-    const [doc1, setDoc1] = useState("")
-    const [doc2, setDoc2] = useState("")
-    const [doc3, setDoc3] = useState("")
+    const [inputs, setInputs] = useState([{ text: "", file: null }]);
+
+
+    const handleInputChange = (index, event) => {
+        const values = [...inputs];
+        if (event.target.type === "text") {
+            values[index].text = event.target.value;
+        } else if (event.target.type === "file") {
+            values[index].file = event.target.files[0];
+        }
+        setInputs(values);
+    };
+
+    const handleAddMoreClick = () => {
+        const values = [...inputs];
+        values.push({ text: "", file: null });
+        setInputs(values);
+    };
+
 
     const handleSubmit = async (vals) => {
         // e.preventDefault();
@@ -53,15 +69,9 @@ const CreateTender = () => {
                     // const values = new values()
                     let vals = new FormData()
                     vals.append("tenders", JSON.stringify(values))
-                    vals.append("doc1", doc1)
-                    vals.append("doc2", doc2)
-                    vals.append("doc3", doc3)
-
+                    vals.append("docs", inputs)
 
                     handleSubmit(vals, 55)
-
-                    // setToastMessage(data.message)
-                    // setShowToast(true)  // for showing toast
 
                 }}
             >
@@ -239,39 +249,28 @@ const CreateTender = () => {
                             </div>
                         </div>
 
-                        <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
-                            <input
-                                id="doc1url1"
-                                name="doc1url1"
-                                placeholder=""
-                                type="file"
-                                accept=".pdf,.jpg,.png"
-                                onChange={(event) => {
-                                    setDoc1(event.target.files[0])
-                                }}
-                            />
-                            <input
-                                id="doc1url2"
-                                name="doc1url2"
-                                placeholder=""
-                                type="file"
-                                accept=".pdf,.jpg,.png"
-                                onChange={(event) => {
-                                    setDoc2(event.target.files[0])
-                                }}
-                            />
-                            <input
-                                id="doc1url3"
-                                name="doc1url3"
-                                placeholder=""
-                                accept=".pdf,.jpg,.png"
-                                type="file"
-                                onChange={(event) => {
-                                    setDoc3(event.target.files[0])
-                                }}
-                            />
-                        </div>
-
+                        {inputs.map((input, index) => (
+                            <div key={index}>
+                                <label>
+                                    Text:
+                                    <input
+                                        type="text"
+                                        value={input.text}
+                                        onChange={(event) => handleInputChange(index, event)}
+                                    />
+                                </label>
+                                <label>
+                                    File:
+                                    <input
+                                        type="file"
+                                        onChange={(event) => handleInputChange(index, event)}
+                                    />
+                                </label>
+                            </div>
+                        ))}
+                        <button type="button" onClick={handleAddMoreClick}>
+                            Add More
+                        </button>
 
                         <div className='flex justify-center'>
                             <button type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>Submit</button>

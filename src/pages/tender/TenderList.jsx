@@ -141,26 +141,26 @@ const TenderList = () => {
       name: 'Status',
       selector: 'status',
       cell: row => (
-        <div style={{ position: 'relative' }}>
+        <div style={{}}>
           <Select
             isDisabled={role === "user"}
             options={options}
             value={options.find(option => option.value === row.status)}
             onChange={option => handleStatusChange(row, option.value)}
-            styles={{
-              menuPortal: base => ({
-                ...base,
-                zIndex: 9999,
-                position: 'fixed',
-                width: '50%',
-                // top: '10%',
-                left: '46%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'white',
-                borderRadius: '5px',
-                boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-              }),
-            }}
+            // styles={{
+            //   menuPortal: base => ({
+            //     ...base,
+            //     zIndex: 9999,
+            //     position: 'fixed',
+            //     width: '50%',
+            //     // top: '10%',
+            //     left: '46%',
+            //     transform: 'translate(-50%, -50%)',
+            //     backgroundColor: 'white',
+            //     borderRadius: '5px',
+            //     boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+            //   }),
+            // }}
             menuPortalTarget={document.body}
           />
         </div>
@@ -383,7 +383,7 @@ const TenderList = () => {
         <AiOutlineCloudDownload size={24} width={24} /> Download CSV
       </CSVLink>
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className='pb-48' style={{ position: 'relative', zIndex: 1, overflowY: 'auto' }}>
         <DataTable
           columns={columns}
           data={filteredData}
