@@ -178,9 +178,10 @@ const ViewTender = () => {
               </div>
             </div>
           </div>
+          {/* Need to map docs nowgoing to get url from other api*/}
 
           {/* <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 my-6'> */}
-          <div className='grid grid-cols-3 place-item-center'>
+          {/* <div className='grid grid-cols-3 place-item-center'>
 
             {tender?.doc1url && fileType(tender.doc1url) === 'pdf' ? (
               renderPdf(tender.doc1url, 1)
@@ -197,7 +198,7 @@ const ViewTender = () => {
             ) : (
               renderImage(tender.doc3url, 3)
             )}
-          </div>
+          </div> */}
         </div>
       ))}
     </div>

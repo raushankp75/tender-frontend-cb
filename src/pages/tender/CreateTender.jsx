@@ -23,6 +23,7 @@ const CreateTender = () => {
 
     const [inputs, setInputs] = useState([{ text: "", file: null }]);
 
+    console.log(inputs, 26)
 
     const handleInputChange = (index, event) => {
         const values = [...inputs];
@@ -69,7 +70,29 @@ const CreateTender = () => {
                     // const values = new values()
                     let vals = new FormData()
                     vals.append("tenders", JSON.stringify(values))
-                    vals.append("docs", inputs)
+                    // vals.append("docs", JSON.stringify(inputs))
+
+                    inputs.forEach((input) => {
+                        vals.append('docs', input.file, input.file.name);
+                        vals.append('docsText', input.text);
+                    });
+
+                    // console.log(inputs.file, 74)
+                    // console.log(inputs.text, 76)
+
+                    // const data = inputs.map(input => (
+
+                    //     console.log(input.text),
+                    //     console.log(input.file)
+                    //     // text: input.text,
+                    //     // file: input.file // Assuming filedata is a property on the file object
+                    // ));
+
+                    inputs.map((input) => {
+                        console.log(input.text, input.file, 87)
+                    })
+
+                    // console.log(data, 83)
 
                     handleSubmit(vals, 55)
 
