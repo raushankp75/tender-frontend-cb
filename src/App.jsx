@@ -11,6 +11,8 @@ import { AuthContext } from './context/AuthContext';
 import { useContext, useState, useEffect } from 'react'
 import EditTender from './pages/tender/EditTender';
 import axios from 'axios';
+import AddUser from './pages/user/AddUser';
+import UserList from './pages/user/UserList';
 
 function App() {
 
@@ -71,10 +73,13 @@ function App() {
             <Route path="/tenderlist" element={<TenderList />} />
             <Route path="/viewtender/:id" element={<ViewTender />} />
             <Route path="/edittender/:id" element={<EditTender />} />
+            <Route path="/adduser" element={<AddUser />} />
+            <Route path="/allusers" element={<UserList/>} />
           </Routes>
         }
         {(role == "user") &&
           <Routes>
+            <Route path="/adduser" element={<AddUser />} />
             <Route path="/" element={<Navigate to="/tenderlist" />} />
             <Route path="/createtender" element={<CreateTender />} />
             <Route path="/tenderlist" element={<TenderList />} />
