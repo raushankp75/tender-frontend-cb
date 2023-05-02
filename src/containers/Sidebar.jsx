@@ -99,7 +99,7 @@ const Sidebar = () => {
           withCredentials: true,
         }
       );
-      console.log(response.data);
+
       localStorage.clear();
       setRole('');
       navigate('/');

@@ -11,11 +11,6 @@ const AuthProvider = ({ children }) => {
   const [searchProduct, setSearchProduct] = useState("")
 
 
-
-  // const [role, setRole] = useState("VENDOR");
-  // console.log(role, 11)
-
-
   return (
     <AuthContext.Provider value={{ role, setRole, isLoggedIn, setIsLoggedIn, setSearchProduct, searchProduct }}>
       {children}

@@ -21,7 +21,7 @@ const ViewTender = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res)
+
         setData([res.data.tender]);
         setDocs(res.data.docs)
       })
