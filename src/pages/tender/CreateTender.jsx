@@ -4,6 +4,7 @@ import axios from 'axios';
 import api from '../../utils/ApiServices';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MdDeleteForever } from 'react-icons/md'
 
 const CreateTender = () => {
 
@@ -39,6 +40,12 @@ const CreateTender = () => {
         const values = [...inputs];
         values.push({ text: "", file: null });
         setInputs(values);
+    };
+
+    const handleDeleteClick = (index) => {
+        const newInputs = [...inputs];
+        newInputs.splice(index, 1);
+        setInputs(newInputs);
     };
 
 
@@ -273,25 +280,36 @@ const CreateTender = () => {
                         </div>
 
                         {inputs.map((input, index) => (
-                            <div key={index}>
+                            <div className='flex gap-4 my-4' key={index}>
                                 <label>
-                                    Text:
+                                    Doc Name:
                                     <input
+                                        className='border-2 mx-4 rounded-md'
                                         type="text"
                                         value={input.text}
                                         onChange={(event) => handleInputChange(index, event)}
                                     />
                                 </label>
                                 <label>
-                                    File:
+                                    {/* File: */}
                                     <input
+
                                         type="file"
                                         onChange={(event) => handleInputChange(index, event)}
                                     />
                                 </label>
+
+                                <button
+                                    className='bg-red-400 rounded-sm text-white px-2 py-1'
+                                    type="button"
+                                    onClick={() => handleDeleteClick(index)}
+                                >
+                                    {/* Delete */}
+                                    <MdDeleteForever />
+                                </button>
                             </div>
                         ))}
-                        <button type="button" onClick={handleAddMoreClick}>
+                        <button className='bg-blue-400 rounded-sm text-white px-2 py-1' type="button" onClick={handleAddMoreClick}>
                             Add More
                         </button>
 

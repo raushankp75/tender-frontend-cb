@@ -11,6 +11,7 @@ const ViewTender = () => {
   const { id } = useParams();
 
   const [data, setData] = useState([]);
+  const [docs, setDocs] = useState([])
 
   useEffect(() => {
     api.get(`tenders/${id}`, {
@@ -21,7 +22,8 @@ const ViewTender = () => {
     })
       .then((res) => {
         console.log(res)
-        setData([res.data]);
+        setData([res.data.tender]);
+        setDocs(res.data.docs)
       })
       .catch((err) => {
         console.log("error, 18")
@@ -42,9 +44,9 @@ const ViewTender = () => {
   };
 
 
-  const renderImage = (url, imgNo) => (
+  const renderImage = (url) => (
     <div className='flex flex-col gap-4 font-bold'>
-      <h1 className='text-center'>Img{imgNo}</h1>
+      {/* <h1 className='text-center'>Img{imgNo}</h1> */}
       <Link target='_blank' to={baseDocUrl + url}>
         <img width="200px" src={baseDocUrl + url} alt="" srcset="" />
       </Link>
@@ -201,6 +203,22 @@ const ViewTender = () => {
           </div> */}
         </div>
       ))}
+
+      <div className="grid grid-cols-3 my-4">
+        {docs?.map((doc) => {
+          return (
+            <div className="flex flex-col gap-2">
+              <h3 ><span className='font-bold'>Doc Name: </span>{doc?.name}</h3>
+              {fileType(doc.path) === 'pdf' ? (
+                renderPdf(doc.path)
+              ) : (
+                renderImage(doc.path)
+              )}
+              {/* <img src={baseDocUrl + doc.path} alt="" srcset="" /> */}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
