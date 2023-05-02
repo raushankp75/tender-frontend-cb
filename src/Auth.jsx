@@ -58,7 +58,7 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     // e.preventDefault();
-    console.log(data);
+
     axios.post("http://localhost:3000/auth/login", data, {
       headers: {
         "Content-Type": "application/json"
@@ -67,8 +67,6 @@ const Auth = () => {
     })
       .then(res => {
 
-        console.log(res.data);
-        // if (res.data.success) {
 
 
         localStorage.setItem("role", res.data.user.role)

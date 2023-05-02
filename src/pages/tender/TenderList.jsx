@@ -61,7 +61,7 @@ const TenderList = () => {
   const handleRemarkSubmit = (e) => {
     e.preventDefault();
     const { id, status } = selectedRow;
-    console.log(id, status, "handleRemarkSubmit")
+
     updateRowStatus(id, status, remark);
     setShowPopup(false);
     setRefresh(!refresh)
@@ -78,9 +78,9 @@ const TenderList = () => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res, 52);
+
         if (res.status == 200) {
-          console.log("Okay")
+
           setRefresh(!refresh)
           toast("Status Changed!")
         }
@@ -282,7 +282,7 @@ const TenderList = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res.data);
+
         setData(res.data);
       })
       .catch((err) => {

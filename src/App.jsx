@@ -37,7 +37,7 @@ function App() {
           withCredentials: true,
         })
           .then((res) => {
-            console.log(res.data);
+
             setExpDate(res.data.expDate);
             try {
               localStorage.setItem('expDate', res.data.expDate);
@@ -50,7 +50,6 @@ function App() {
           });
       }
 
-      // console.log("not expired")
     }, 300000); // refresh the token every 5 minutes (300000 milliseconds)
 
     return () => clearInterval(interval);
@@ -74,7 +73,7 @@ function App() {
             <Route path="/viewtender/:id" element={<ViewTender />} />
             <Route path="/edittender/:id" element={<EditTender />} />
             <Route path="/adduser" element={<AddUser />} />
-            <Route path="/allusers" element={<UserList/>} />
+            <Route path="/allusers" element={<UserList />} />
           </Routes>
         }
         {(role == "user") &&

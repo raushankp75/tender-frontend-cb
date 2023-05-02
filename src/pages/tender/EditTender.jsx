@@ -13,9 +13,10 @@ const EditTender = () => {
 
   const [initialValues, setInitialValues] = useState(null);
 
-  const [doc1, setDoc1] = useState("")
-  const [doc2, setDoc2] = useState("")
-  const [doc3, setDoc3] = useState("")
+
+  // const [doc1, setDoc1] = useState("")
+  // const [doc2, setDoc2] = useState("")
+  // const [doc3, setDoc3] = useState("")
 
 
   useEffect(() => {
@@ -26,17 +27,23 @@ const EditTender = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res, 38)
+        // console.log(res.data.tender, 29)
+        // console.log(...res.data.tender)
+
+
         const formattedData = {
-          ...res.data,
-          startDate: format(new Date(res.data.startDate), 'yyyy-MM-dd'),
-          endDate: format(new Date(res.data.endDate), 'yyyy-MM-dd'),
-          prebidMeetingDate: format(new Date(res.data.prebidMeetingDate), 'yyyy-MM-dd'),
+          ...res.data.tender,
+          startDate: format(new Date(res.data.tender.startDate), 'yyyy-MM-dd'),
+          endDate: format(new Date(res.data.tender.endDate), 'yyyy-MM-dd'),
+          prebidMeetingDate: format(new Date(res.data.tender.prebidMeetingDate), 'yyyy-MM-dd'),
         };
-        // setInitialValues(formattedData);
+
+        // console.log(formattedData, 38)
         setInitialValues(formattedData);
+        // setInitialValues(formattedData);
       })
       .catch((err) => {
+        console.log(err)
         console.log("error, 18")
       })
 
@@ -51,7 +58,6 @@ const EditTender = () => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res.data, 52);
         // if (res.data.success) {
         toast(res.data.message)
         // }
@@ -61,14 +67,6 @@ const EditTender = () => {
       })
   }
 
-
-  // const handleData = (e) => {
-  //   const newData = { ...data }
-  //   newData[e.target.id] = e.target.value;
-  //   setData(newData)
-  // }
-
-  console.log(initialValues, 70)
 
   if (!initialValues) {
     return <div>Loading...</div>;
@@ -81,24 +79,19 @@ const EditTender = () => {
         // enableReinitialize // missing piece!!
         initialValues={initialValues}
 
-
-        // initialValues = {data || initialValues}
         onSubmit={async (values) => {
           await new Promise((r) => setTimeout(r, 500));
-          // alert(JSON.stringify(values, null, 2));
-          // const values = new values()
+
           let vals = new FormData()
           vals.append("tenders", JSON.stringify(values))
-          vals.append("doc1", doc1)
-          vals.append("doc2", doc2)
-          vals.append("doc3", doc3)
+          // vals.append("doc1", doc1)
+          // vals.append("doc2", doc2)
+          // vals.append("doc3", doc3)
 
-          // console.log(vals, 54)
+
           handleSubmit(vals)
 
-          // setToastMessage(data.message)
-          // setShowToast(true)  // for showing toast
-          console.log(values, 88)
+
         }}
       >
 
@@ -291,7 +284,7 @@ const EditTender = () => {
                 </div>
               </div>
 
-              <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
+              {/* <div className='flex md:flex-row flex-col md:justify-between md:gap-y-0 gap-y-5 mb-12'>
                 <input
                   id="doc1url1"
                   name="doc1url1"
@@ -319,7 +312,7 @@ const EditTender = () => {
                     setDoc3(event.target.files[0])
                   }}
                 />
-              </div>
+              </div> */}
 
 
               <div className='flex justify-center'>
