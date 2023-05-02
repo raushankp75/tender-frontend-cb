@@ -58,7 +58,7 @@ const EditTender = () => {
       withCredentials: true,
     })
       .then(res => {
-
+        console.log(res, 61)
         // if (res.data.success) {
         toast(res.data.message)
         // }
